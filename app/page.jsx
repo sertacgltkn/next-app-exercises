@@ -29,7 +29,7 @@ async function Home() {
     getData3(),
   ])
 
-  console.log(data);
+  console.log(data); 
   return <h1>Data Fetching : {data.title}</h1>;
 }
 
