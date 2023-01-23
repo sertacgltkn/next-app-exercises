@@ -1,5 +1,7 @@
+"use client"
 import React from "react";
 import { Inter, Open_Sans } from "@next/font/google";
+import Script from "next/script";
 
 const interFont = Inter({ subsets: ["latin"] });
 const openSansFont = Open_Sans({ subsets: ["latin"] });
@@ -27,6 +29,14 @@ const openSansFont = Open_Sans({ subsets: ["latin"] });
 // };
 
 function Home() {
+  const onJqueryReady = () => {
+    console.log("jQuery is ready");
+    $("#target-for-jquery").text("jQuery is ready");
+  };
+
+  const onError = () => {
+    console.log("Error loading script");
+  };
   // const [getData, getData2, getData3] = await Promise.all([
   //   getData(),
   //   getData2(),
@@ -38,6 +48,12 @@ function Home() {
     <div>
       <h2 className={openSansFont.className}>what's up</h2>
       <h1 className={interFont.className}>Hello world</h1>
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/query/3.6.2/jquery.min.js"
+        onReady={onJqueryReady}
+      />
+      <p id="target-for-jquery">This text will be replaced by jQuery</p>
+      <Script src="https://dummy.com" onError={onError} />
     </div>
   );
 }
